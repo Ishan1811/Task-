@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+
+.calculator {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.display {
+  width: 100%;
+  height: 20px;
+  border: 1px solid black;
+  padding: 5px;
+  text-align: right;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #eee;
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+  <div class="display"></div>
+  <button value="1">1</button>
+  <button value="2">2</button>
+  <button value="3">3</button>
+  <button value="+">+</button>
+  <button value="4">4</button>
+  <button value="5">5</button>
+  <button value="6">6</button>
+  <button value="-">-</button>
+  <button value="7">7</button>
+  <button value="8">8</button>
+  <button value="9">9</button>
+  <button value="*">*</button>
+  <button value="0">0</button>
+  <button value=".">.</button>
+  <button value="=">=</button>
+</div>
+<script>
+var display = document.querySelector(".display");
+var buttons = document.querySelectorAll("button");
+
+var currentNumber = "";
+var operator = "";
+
+for (var button of buttons) {
+  button.addEventListener("click", function() {
+    var value = button.value;
+
+    if (value == "=") {
+      // Calculate the result of the current calculation
+      var result = eval(currentNumber + operator);
+      display.value = result;
+      currentNumber = "";
+      operator = "";
+    } else if (value == ".") {
+      // Only allow one decimal point in the current number
+      if (currentNumber.indexOf(".") == -1) {
+        currentNumber += value;
+      }
+    } else {
+      // Update the current number or operator
+      if (operator == "") {
+        currentNumber += value;
+      } else {
+        operator = value;
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
